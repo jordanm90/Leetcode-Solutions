@@ -1,0 +1,36 @@
+class Solution {
+    public boolean isValid(String s) {
+
+       
+    if (s.length()%2 != 0){
+        return false;
+    }
+    Stack <Character> stack = new Stack();
+    char[] chars = new char[s.length()];
+ 
+        // Copying chars into array
+        
+        for (int i = 0; i < s.length(); i++) {
+            chars[i] = s.charAt(i);
+        }
+
+        for (char c : chars) {
+		//push opening braces to stack & compare with closed
+        if (c == '(' || c == '{' || c =='['){
+            stack.push(c);
+        //if top element in stack is ( and given element is ) then remove that pair. 
+        } else if ( c == ')' && !stack.isEmpty() && stack.peek() ==  '('){
+            stack.pop();
+        } else if (c == ']' && !stack.isEmpty() && stack.peek() ==  '['){
+            stack.pop();
+        } else if (c == '}' && !stack.isEmpty() && stack.peek() ==  '{'){
+            stack.pop();
+			// IN CASE OF EVEN BUT NOT VALID
+        }  else{
+                return false; 
+        }
+    }    
+    return stack.isEmpty();
+        
+    }
+}
